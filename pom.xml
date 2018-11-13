@@ -127,7 +127,7 @@
 							<outputDirectory>${basedir}/target/classes/static</outputDirectory>
 							<resources>
 								<resource>
-									<directory>heroes_ui/dist</directory>
+									<directory>heroes_ui/dist/angular-tour-of-heroes</directory>
 									<filtering>true</filtering>
 								</resource>
 							</resources>
