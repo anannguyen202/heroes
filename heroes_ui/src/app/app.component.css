@@ -28,3 +28,14 @@ nav a:hover {
 nav a.active {
   color: #039be5;
 }
+.box {
+  margin-top: 5em;
+  width: 400px;
+}
+.active {
+  font-size: x-large;
+}
+.nav-title {
+  display: inline;
+  margin-right: 10px;
+}
