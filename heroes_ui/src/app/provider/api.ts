@@ -15,21 +15,17 @@ export class ApiProvider {
         this.apiUrl = "localhost:8080/";
     }
 
-    setHeaders() {
-        const headers = {
-            'Content-Type': 'application/json'
-        }
-        return new Headers(headers);
-    }
-
     public post(endpoint: string, body: any, reqOpts?: any) {
         if (!reqOpts) {
-            let h = new Headers({ 'Content-Type': 'application/json' });
+            let h = new HttpHeaders().set('Content-Type', 'application/json')
             // h = h.append('Authorization', this.getToken());
+            h.append('Access-Control-Allow-Headers', 'Content-Type');
+            h.append('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+            h.append('Access-Control-Allow-Origin', '*');
             reqOpts = { headers: h };
+            console.log(h);
         }
-        console.log(body);
-        return this.http.post(this.apiUrl + endpoint, JSON.stringify(body), reqOpts);
+        return this.http.post(this.apiUrl + endpoint, body, reqOpts);
     }
 
     public getUserId(): string {

@@ -12,8 +12,6 @@ import { DashboardComponent } from './view/dashboard/dashboard.component';
 import { MessageComponent } from './view/message/message.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
 import { HeroSearchComponent } from './view/hero-search/hero-search.component';
 import { SignInComponent } from './view/sign-in/sign-in.component';
 import { SignUpComponent } from './view/sign-up/sign-up.component';
@@ -37,10 +35,7 @@ import { UserProvider } from './provider/user';
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    )
+    ReactiveFormsModule
   ],
   providers: [AuthGuard, ApiProvider, UserProvider],
   bootstrap: [AppComponent]
