@@ -1,25 +1,28 @@
 <div class="box">
 	<div class="insi">
 		<h3>Sign in</h3>
-		<div class="form-group" *ngIf="messageError">
-			<div class="alert alert-danger" role="alert">
-				{{messageError}}
+
+		<form [formGroup]="formSignIn" (ngSubmit)="onSubmit()">
+			<div class="form-group" *ngIf="messageError">
+				<div class="alert alert-danger" role="alert">
+					{{messageError}}
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<label>Username</label>
-			<input class="form-control" [(ngModel)]="userName">
-		</div>
+			<div class="form-group">
+				<label>Username</label>
+				<input class="form-control" formControlName="userName">
+			</div>
 
-		<div class="form-group">
-			<label>Password</label>
-			<input class="form-control" [(ngModel)]="password">
-		</div>
+			<div class="form-group">
+				<label>Password</label>
+				<input class="form-control" formControlName="password">
+			</div>
 
-		<div class="form-group">
-			<button class="btn btn-primary btn-block" (click)="signIn()">Sign in</button>
-		</div>
+			<div class="form-group">
+				<button class="btn btn-primary btn-block" type="submit">Sign in</button>
+			</div>
+		</form>
 
-		 <a class="nav-title" routerLink="/sign-up" routerLinkActive="active">Sign up</a>
+		<a class="nav-title" routerLink="/sign-up" routerLinkActive="active">Sign up</a>
 	</div>
 </div>

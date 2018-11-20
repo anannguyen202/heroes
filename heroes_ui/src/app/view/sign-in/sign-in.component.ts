@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserProvider } from 'src/app/provider/user';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-sign-in',
@@ -9,21 +10,25 @@ import { Router } from '@angular/router';
 })
 export class SignInComponent implements OnInit {
 
-    private userName;
-    private password;
-    private messageError;
+    public messageError;
+    public formSignIn: FormGroup;
 
     constructor(
         private userProvider: UserProvider,
-        private router: Router
-    ) { }
+        private router: Router,
+        private fb: FormBuilder
+    ) { 
+        this.formSignIn = this.fb.group({
+            userName: ['', Validators.required],
+            password: ['', Validators.required]
+        });
+    }
 
     ngOnInit() {
     }
 
-    signIn() {
-        const info = { userName: this.userName, password: this.password };
-        this.userProvider.signIn(info)
+    onSubmit() {
+        this.userProvider.signIn(this.formSignIn.value)
             .subscribe((rsp:any) => {
                 if(rsp.status == "error")
                     return this.messageError = rsp.message;

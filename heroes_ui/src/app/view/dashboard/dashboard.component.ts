@@ -27,9 +27,4 @@ export class DashboardComponent implements OnInit {
             .subscribe((rsp: any) => this.heroes = rsp.result.slice(1, 5));
     }
 
-    signOut() {
-        localStorage.clear();
-        // this.router.navigateByUrl('/dashboard');
-    }
-
 }
