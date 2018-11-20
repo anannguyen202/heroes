@@ -1,9 +1,17 @@
 package com.example.heroes.bll;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,20 +21,32 @@ import com.example.heroes.model.UserModel;
 
 @Service(value = "userService")
 @Transactional
-public class UserService {
-	
+public class UserService implements UserDetailsService {
 	// region -- Fields --
 
 	@Autowired
 	private UserDao userDao;
 
-	@PersistenceContext
-	private EntityManager entityManager;
-
 	// end
 
 	// region -- Methods --
-	
+
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		/*
+		 * PortalUserDto m = portalUserDao.getByUserId(email);
+		 * 
+		 * if (m.getUserId().isEmpty()) { throw new
+		 * UsernameNotFoundException("Invalid email or password."); }
+		 * 
+		 * String hash = m.getPassword(); List<SimpleGrantedAuthority> auths =
+		 * getRoleBy(m.getId());
+		 */
+		List<SimpleGrantedAuthority> auths = new ArrayList<SimpleGrantedAuthority>();
+
+		return new User(email, "", auths);
+	}
+
 	public UserModel getBy(int id) {
 		UserModel res = userDao.getBy(id);
 		return res;

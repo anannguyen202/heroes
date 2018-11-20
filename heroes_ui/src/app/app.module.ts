@@ -18,6 +18,8 @@ import { SignUpComponent } from './view/sign-up/sign-up.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ApiProvider } from './provider/api';
 import { UserProvider } from './provider/user';
+import { HeroesProvider } from './provider/heroes';
+import { HomeComponent } from './view/home/home.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { UserProvider } from './provider/user';
     MessageComponent,
     HeroSearchComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,7 @@ import { UserProvider } from './provider/user';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [AuthGuard, ApiProvider, UserProvider],
+  providers: [AuthGuard, ApiProvider, UserProvider, HeroesProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

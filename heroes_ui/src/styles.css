@@ -49,5 +49,18 @@ body, input[type="text"], button {
 }
 
 .insi {
-	padding-top: 20px;
+	padding-top: 50px;
+}
+
+.box {
+	width: 400px;
+	margin: 0 auto;
+}
+
+@media screen and (max-width: 770px) {
+	
+	.box {
+		width: 90%;
+	}
+
 }

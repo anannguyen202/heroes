@@ -1,17 +1,1 @@
-<ng-container *ngIf="userName;else sign_in">
-
-<h1>{{ title }}</h1>
-<nav>
-	<a routerLink="dashboard" routerLinkActive="active">Dashboard</a> <a
-		routerLink="heroes" routerLinkActive="active">Heroes</a>
-</nav>
-<router-outlet></router-outlet> <app-message></app-message> </ng-container>
-
-<ng-template #sign_in>
-<div class="container box">
-	<a class="nav-title" routerLink="/sign-in" routerLinkActive="active">Sign
-		in</a> <a class="nav-title" routerLink="/sign-up"
-		routerLinkActive="active">Sign up</a>
-	<router-outlet></router-outlet>
-</div>
-</ng-template>
+<router-outlet></router-outlet>

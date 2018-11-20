@@ -7,14 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-    title = 'Tour of Heroes';
     userName;
 
     constructor() {
-
-        // localStorage.setItem("userName", "An");
-        // this.userName = localStorage.getItem("userName");
-
+        this.userName = localStorage.getItem("userName");
     }
 
 }

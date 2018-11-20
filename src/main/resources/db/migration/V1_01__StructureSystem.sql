@@ -8,3 +8,10 @@ CREATE TABLE PUBLIC."user"
 	"first_name"			VARCHAR(32),
 	"last_name"				VARCHAR(32)
 );
+
+DROP TABLE IF EXISTS PUBLIC."hero";
+CREATE TABLE PUBLIC."hero"
+(
+	"id"					SERIAL PRIMARY KEY,
+	"name"					VARCHAR(64)
+);

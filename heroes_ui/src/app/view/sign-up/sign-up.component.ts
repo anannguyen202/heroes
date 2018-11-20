@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserProvider } from 'src/app/provider/user';
-import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-sign-up',
@@ -10,16 +11,18 @@ import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 export class SignUpComponent implements OnInit {
 
     signUpForm: FormGroup;
+    messageError;
 
     constructor(
         private user: UserProvider,
-        private fb: FormBuilder
+        private fb: FormBuilder,
+        private router: Router
     ) { }
 
     ngOnInit() {
         this.signUpForm = this.fb.group({
-            userName: [],
-            password: [],
+            userName: ['',[Validators.required]],
+            password: ['',[Validators.required]],
             email: [],
             firstName: [],
             lastName: []
@@ -27,13 +30,11 @@ export class SignUpComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log(this.signUpForm.value);
-        const info = {
-            userName: "an",
-            password: "123"
-        };
-        this.user.signUp(info)
-            .subscribe(rsp => {
+        this.user.signUp(this.signUpForm.value)
+            .subscribe((rsp:any) => {
+                if(rsp.status == "error")
+                    return this.messageError = rsp.message;
+                this.router.navigateByUrl('/dashboard');
                 console.log(rsp);
             })
     }

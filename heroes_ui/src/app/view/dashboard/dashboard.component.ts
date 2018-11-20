@@ -1,25 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { HeroService } from '../../hero.service';
 import { Hero } from '../../hero';
+import { Router } from '@angular/router';
+import { HeroesProvider } from 'src/app/provider/heroes';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
 
-  heroes: Hero[];
+    heroes: Hero[];
 
-  constructor(private heroService:HeroService) { }
+    constructor(
+        private heroProvider: HeroesProvider,
+        private router: Router
+    ) { }
 
-  getHeroes(): void {
-    this.heroService.getHeroes()
-    .subscribe(heroes => this.heroes = heroes.slice(1,5));
-  }
+    ngOnInit() {
+        this.getHeroes();
+    }
 
-  ngOnInit() {
-    this.getHeroes();
-  }
+    getHeroes(): void {
+        this.heroProvider.getHeroes()
+            .subscribe((rsp: any) => this.heroes = rsp.result.slice(1, 5));
+    }
+
+    signOut() {
+        localStorage.clear();
+        // this.router.navigateByUrl('/dashboard');
+    }
 
 }

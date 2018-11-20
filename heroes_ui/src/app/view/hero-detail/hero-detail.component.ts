@@ -3,6 +3,7 @@ import { Hero } from '../../hero';
 import { ActivatedRoute } from '@angular/router';
 import { HeroService } from '../../hero.service';
 import { Location } from '@angular/common'
+import { HeroesProvider } from 'src/app/provider/heroes';
 
 @Component({
   selector: 'app-hero-detail',
@@ -16,7 +17,7 @@ export class HeroDetailComponent implements OnInit {
   constructor(
     private location: Location,
     private route: ActivatedRoute,
-    private heroService: HeroService
+    private HeroesProvider: HeroesProvider
   ) { }
 
   ngOnInit() {
@@ -25,8 +26,8 @@ export class HeroDetailComponent implements OnInit {
 
   getHero():void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.heroService.getHero(id)
-    .subscribe(hero => this.hero = hero); 
+    this.HeroesProvider.getHero(id)
+    .subscribe((rsp: any) => this.hero = rsp.result); 
   }
 
   goBack():void {
@@ -34,10 +35,10 @@ export class HeroDetailComponent implements OnInit {
   }
 
   save():void {
-    this.heroService.updateHero(this.hero)
-    .subscribe(() => {
-      this.goBack();
-    });
+    // this.heroService.updateHero(this.hero)
+    // .subscribe(() => {
+    //   this.goBack();
+    // });
   }
 
 }

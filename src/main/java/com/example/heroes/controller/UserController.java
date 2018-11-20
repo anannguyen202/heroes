@@ -64,7 +64,7 @@ public class UserController {
 
 				// Set data
 				Map<String, Object> data = new LinkedHashMap<>();
-				data.put("key", userName);
+				data.put("userName", userName);
 				
 				res.setResult(data);
 			}
@@ -76,7 +76,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/sign-up")
-	@CrossOrigin(origins = "http://localhost:4200")
+	//@CrossOrigin(origins = "http://localhost:4200")
 	public ResponseEntity<?> signUp(@RequestBody UserSignUpReq req) {
 		SingleRsp res = new SingleRsp();
 
