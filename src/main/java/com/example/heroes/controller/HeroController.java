@@ -10,6 +10,7 @@ package com.example.heroes.controller;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.jboss.logging.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,17 +22,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.heroes.bll.HeroService;
 import com.example.heroes.bll.UserService;
 import com.example.heroes.model.HeroModel;
-import com.example.heroes.model.UserModel;
+import com.example.heroes.model.Users;
 import com.example.heroes.req.HeroReq;
 import com.example.heroes.req.UserSignInReq;
 import com.example.heroes.req.UserSignUpReq;
 import com.example.heroes.rsp.MultipleRsp;
 import com.example.heroes.rsp.SingleRsp;
+import com.example.heroes.common.Utils;
+import com.example.heroes.dto.PayloadDto;
+
 import java.util.List;
 
 
@@ -46,6 +51,27 @@ public class HeroController {
 	// end
 
 	// region -- Methods --
+
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public ResponseEntity<?> searchBy(
+			@RequestHeader HttpHeaders header,
+			@RequestParam(value = "name", required = true) String name
+		) {
+		SingleRsp res = new SingleRsp();
+
+		try {
+			// Handle
+			String nameLowerCase = name.toLowerCase();
+			List<HeroModel> m = heroService.searchBy(nameLowerCase);
+		
+			res.setResult(m);
+			
+		} catch (Exception ex) {
+			res.setError(ex.getMessage());
+		}
+
+		return new ResponseEntity<>(res, HttpStatus.OK);
+	}
 
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
 	public ResponseEntity<?> getHeroes(@RequestHeader HttpHeaders header) {
@@ -72,6 +98,9 @@ public class HeroController {
 		SingleRsp res = new SingleRsp();
 
 		try {
+			PayloadDto pl = Utils.getTokenInfor(header);
+			int userId = pl.getId();
+			
 			// Handle
 			HeroModel m = heroService.getBy(id);
 		

@@ -48,8 +48,13 @@ body, input[type="text"], button {
 	cursor: auto;
 }
 
+.title-3 {
+	font-weight: bold;
+    margin-bottom: 15px;
+}
+
 .insi {
-	padding-top: 50px;
+	padding-top: 100px;
 }
 
 .box {
@@ -63,4 +68,17 @@ body, input[type="text"], button {
 		width: 90%;
 	}
 
+}
+
+.notice {
+    font-size: medium;
+    text-align: center;
+    margin-top: 15px;
+    color: #666;
+}
+
+.form-error {
+	color: #ff0000;
+	font-size: small;
+	text-align: right;
 }

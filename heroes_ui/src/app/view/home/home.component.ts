@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
 
   signOut() {
       localStorage.clear();
-      this.router.navigateByUrl('/home');
+      this.router.navigate(['/sign-in']);
   }
 
 }

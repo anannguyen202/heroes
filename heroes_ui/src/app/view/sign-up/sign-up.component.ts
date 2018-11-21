@@ -29,12 +29,17 @@ export class SignUpComponent implements OnInit {
         });
     }
 
+    checkInvalid(control) {
+        return this.signUpForm.get(control).invalid && this.signUpForm.get(control).touched;
+    }
+
     onSubmit() {
         this.user.signUp(this.signUpForm.value)
             .subscribe((rsp:any) => {
                 if(rsp.status == "error")
                     return this.messageError = rsp.message;
-                this.router.navigateByUrl('/dashboard');
+                localStorage.setItem("userName", rsp.result.userName);
+                this.router.navigate(['/home/dashboard']);
                 console.log(rsp);
             })
     }

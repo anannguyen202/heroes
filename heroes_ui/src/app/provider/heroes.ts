@@ -16,4 +16,12 @@ export class HeroesProvider {
         return this.api.get('hero/getById/' + id);
     }
 
+    public addHero(hero: any) {
+        return this.api.post('hero/add', hero);
+    }
+
+    public deleteHero(id: any) {
+        return this.api.post('hero/delete', id);
+    }
+
 }

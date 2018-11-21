@@ -59,6 +59,25 @@ export class ApiProvider {
         return this.http.post(this.apiUrl + endpoint, body, reqOpts);
     }
 
+    public put(endpoint: string, body: any, reqOpts?: any) {
+        if (!reqOpts) {
+            let h = new HttpHeaders().set('Authorization', '')
+            h = h.append('Content-Type', 'application/json');
+            reqOpts = { headers: h };
+        }
+
+        return this.http.put(this.apiUrl + endpoint, body, reqOpts);
+    }
+
+    public delete(endpoint: string, reqOpts?: any) {
+        if (!reqOpts) {
+            let h = new HttpHeaders().set('Authorization','')
+            reqOpts = { headers: h };
+        }
+
+        return this.http.delete(this.apiUrl + endpoint, reqOpts);
+    }
+
     public getUserId(): string {
         let t = localStorage.getItem('CURRENT_TOKEN');
         let json = JSON.parse(t);

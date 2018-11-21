@@ -20,7 +20,7 @@ import com.example.heroes.dal.HeroDao;
 import com.example.heroes.dal.UserDao;
 import com.example.heroes.dto.ProfileDto;
 import com.example.heroes.model.HeroModel;
-import com.example.heroes.model.UserModel;
+import com.example.heroes.model.Users;
 
 import ch.qos.logback.classic.Logger;
 
@@ -45,6 +45,11 @@ public class HeroService {
 
 	public List<HeroModel> getHeroes() {
 		List<HeroModel> res = heroDao.getHeroes();
+		return res;
+	}
+
+	public List<HeroModel> searchBy(String name) {
+		List<HeroModel> res = heroDao.searchBy(name);
 		return res;
 	}
 

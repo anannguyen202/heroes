@@ -17,15 +17,18 @@ public class UserSignInReq {
 
 	@JsonProperty(value = "password")
 	private String password;
-	
+
 	@JsonProperty(value = "clientKey")
 	private String clienKey;
 
 	@JsonProperty(value = "token")
 	private String token;
 
+	@JsonProperty(value = "sendToken")
+	private boolean sendToken;
+
 	// end
-	
+
 	// region -- Get set --
 
 	public String getUserName() {
@@ -60,12 +63,19 @@ public class UserSignInReq {
 		this.token = token;
 	}
 
+	public boolean isSendToken() {
+		return sendToken;
+	}
+
+	public void setSendToken(boolean sendToken) {
+		this.sendToken = sendToken;
+	}
+
 	// end
-	
+
 	// region -- Methods --
-	
+
 	public UserSignInReq() {
-		
 	}
 
 	// end

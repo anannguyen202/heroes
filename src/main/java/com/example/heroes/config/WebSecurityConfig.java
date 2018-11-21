@@ -60,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		}
 
 		http.authorizeRequests()
-				.antMatchers("/", "/user/sign-in", "/user/sign-up", "/hero/get", "/hero/getById/{id}", "/hero/add", "/hero/delete")
+				.antMatchers("/", "/user/sign-in", "/user/sign-up", "/hero/get", "/hero/getById/{id}", "/hero/add", "/hero/delete", "/hero/search")
 				.permitAll().anyRequest().authenticated().and().exceptionHandling()
 				.and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);

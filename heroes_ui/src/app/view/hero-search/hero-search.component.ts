@@ -25,16 +25,16 @@ export class HeroSearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.searchResult = this.searchTerms.pipe(
-      debounceTime(300),
-      distinctUntilChanged(),
-      switchMap((term: string) => this.heroService.searchHeroes(term)),
-    );
-    this.searchResult.subscribe(
-      heroes => {
-        console.log(heroes);
-      }
-    )
+    // this.searchResult = this.searchTerms.pipe(
+    //   debounceTime(300),
+    //   distinctUntilChanged(),
+    //   switchMap((term: string) => this.heroService.searchHeroes(term)),
+    // );
+    // this.searchResult.subscribe(
+    //   heroes => {
+    //     console.log(heroes);
+    //   }
+    // )
   }
 
 }

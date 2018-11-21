@@ -22,4 +22,7 @@ public interface HeroDao extends CrudRepository<HeroModel, Integer> {
 	@Query("FROM HeroModel")
 	public List<HeroModel> getHeroes();
 	
+	@Query("FROM HeroModel h WHERE h.name like %:name%")
+	public List<HeroModel> searchBy(@Param("name") String name);
+	
 }

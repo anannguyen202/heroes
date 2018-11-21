@@ -27,13 +27,17 @@ export class SignInComponent implements OnInit {
     ngOnInit() {
     }
 
+    checkInvalid(control) {
+        return this.formSignIn.get(control).invalid && this.formSignIn.get(control).touched;
+    }
+
     onSubmit() {
         this.userProvider.signIn(this.formSignIn.value)
             .subscribe((rsp:any) => {
                 if(rsp.status == "error")
                     return this.messageError = rsp.message;
                 localStorage.setItem("userName", rsp.result.userName);
-                this.router.navigateByUrl('/dashboard');
+                this.router.navigate(['/home/dashboard']);
                 console.log(rsp);
             });
     }
