@@ -32,13 +32,17 @@ export class SignInComponent implements OnInit {
     }
 
     onSubmit() {
-        this.userProvider.signIn(this.formSignIn.value)
-            .subscribe((rsp:any) => {
+        const info = {
+            "userName": this.formSignIn.value.userName,
+            "password": this.formSignIn.value.password,
+	        "sendToken": true
+        };
+        this.userProvider.signIn(info)
+            .subscribe((rsp: any) => {
                 if(rsp.status == "error")
                     return this.messageError = rsp.message;
-                localStorage.setItem("userName", rsp.result.userName);
+                localStorage.setItem('key', rsp.result.key);
                 this.router.navigate(['/home/dashboard']);
-                console.log(rsp);
             });
     }
 
