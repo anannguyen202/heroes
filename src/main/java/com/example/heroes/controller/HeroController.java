@@ -75,13 +75,18 @@ public class HeroController {
 
 	@RequestMapping(value = "/get", method = RequestMethod.GET)
 	public ResponseEntity<?> getHeroes(@RequestHeader HttpHeaders header) {
-		SingleRsp res = new SingleRsp();
+		MultipleRsp res = new MultipleRsp();
 
 		try {
 			// Handle
 			List<HeroModel> m = heroService.getHeroes();
+			
+			Map<String, Object> data = new LinkedHashMap<>();
+			
+			data.put("total", heroService.getTotalHero());
+			data.put("list", m);
 		
-			res.setResult(m);
+			res.setResult(data);
 			
 		} catch (Exception ex) {
 			res.setError(ex.getMessage());

@@ -26,32 +26,46 @@ export class ApiProvider {
             this.imgUrl = config.imgUrl;
         }
     }
+
+    public getToken(): string {
+        return 'Bearer ' + localStorage.getItem('key');
+    }
     
     public getx(endpoint: string): Observable<any> {
         return this.http.get(endpoint);
     }
 
-    public get(endpoint: string, params?: any, reqOpts?: any) {
+    public get(endpoint: string, reqOpts?: any) {
         if (!reqOpts) {
-            reqOpts = {
-                params: new HttpParams()
-            };
-        }
-
-        // Support easy query params for GET requests
-        if (params) {
-            reqOpts.params = new HttpParams();
-            for (let k in params) {
-                reqOpts.params.set(k, params[k]);
-            }
+            let h = new HttpHeaders().set('Authorization', this.getToken())
+            h = h.append('Content-Type', 'application/json');
+            reqOpts = { headers: h };
         }
 
         return this.http.get(this.apiUrl + endpoint, reqOpts);
     }
 
+    // public get(endpoint: string, params?: any, reqOpts?: any) {
+    //     if (!reqOpts) {
+    //         reqOpts = {
+    //             params: new HttpParams()
+    //         };
+    //     }
+
+    //     // Support easy query params for GET requests
+    //     if (params) {
+    //         reqOpts.params = new HttpParams();
+    //         for (let k in params) {
+    //             reqOpts.params.set(k, params[k]);
+    //         }
+    //     }
+
+    //     return this.http.get(this.apiUrl + endpoint, reqOpts);
+    // }
+
     public post(endpoint: string, body: any, reqOpts?: any) {
         if (!reqOpts) {
-            let h = new HttpHeaders().set('Authorization', '')
+            let h = new HttpHeaders().set('Authorization', this.getToken())
             h = h.append('Content-Type', 'application/json');
             reqOpts = { headers: h };
         }
@@ -71,7 +85,8 @@ export class ApiProvider {
 
     public delete(endpoint: string, reqOpts?: any) {
         if (!reqOpts) {
-            let h = new HttpHeaders().set('Authorization','')
+            let h = new HttpHeaders().set('Authorization', '')
+            h = h.append('Content-Type', 'application/json');
             reqOpts = { headers: h };
         }
 

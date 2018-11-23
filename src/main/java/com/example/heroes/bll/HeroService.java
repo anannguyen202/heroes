@@ -38,6 +38,11 @@ public class HeroService {
 
 	// region -- Methods --
 
+	public int getTotalHero() {
+		int res = heroDao.getTotalHero();
+		return res;
+	}
+
 	public HeroModel getBy(int id) {
 		HeroModel res = heroDao.getBy(id);
 		return res;

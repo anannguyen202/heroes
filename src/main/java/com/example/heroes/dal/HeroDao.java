@@ -16,6 +16,9 @@ import java.util.List;
 
 public interface HeroDao extends CrudRepository<HeroModel, Integer> {
 
+	@Query(nativeQuery = true, value = "SELECT get_total_hero()")
+	public int getTotalHero();
+	
 	@Query("FROM HeroModel h WHERE h.id = :id")
 	public HeroModel getBy(@Param("id") int id);
 	

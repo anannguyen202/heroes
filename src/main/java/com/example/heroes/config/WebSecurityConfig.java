@@ -22,6 +22,10 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.example.heroes.common.Const;
+import com.example.heroes.config.JwtEntryPoint;
+import com.example.heroes.config.JwtFilter;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -30,6 +34,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Resource(name = "userService")
 	private UserDetailsService userDetailsService;
+
+	@Autowired
+	private JwtEntryPoint unauthorizedHandler;
 
 	// end
 
@@ -46,11 +53,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
 	}
 
+	@Bean
+	public JwtFilter authenticationTokenFilterBean() throws Exception {
+		return new JwtFilter();
+	}
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// Get environment variable
 		String mod = System.getenv("DEV");
-		mod="Y";
 
 		if (mod != null && "Y".equals(mod)) {
 			http.cors().and().csrf().disable();
@@ -60,12 +71,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		}
 
 		http.authorizeRequests()
-				.antMatchers("/", "/user/sign-in", "/user/sign-up", "/hero/get", "/hero/getById/{id}", "/hero/add", "/hero/delete", "/hero/search")
-				.permitAll().anyRequest().authenticated().and().exceptionHandling()
-				.and().sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+				.antMatchers("/", "/user/sign-in", "/user/sign-up")
+				.permitAll().antMatchers("/user/reset-password").hasAuthority(Const.Authentication.ROLE_ADMIN)
+				.anyRequest().authenticated().and().exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
+				.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-		//http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
+		http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 	}
 
 	@Override
@@ -95,7 +106,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		// Get environment variable
 		String mod = System.getenv("DEV");
-		mod="Y";
 
 		if (mod != null && "Y".equals(mod)) {
 			CorsConfiguration config = new CorsConfiguration();
