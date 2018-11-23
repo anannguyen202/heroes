@@ -1,13 +1,13 @@
 <div class="container">
 
-    <nav>
-        <a routerLink="dashboard" routerLinkActive="active">Dashboard</a>
-        <a routerLink="heroes" routerLinkActive="active">Heroes</a>
-        <a routerLink="" (click)="signOut()">Sign out</a>
-    </nav>
+	<nav>
+		<a routerLink="dashboard" routerLinkActive="active">Dashboard</a> <a
+			routerLink="heroes" routerLinkActive="active">Heroes</a> <a
+			routerLink="" (click)="signOut()">Sign out</a>
+	</nav>
 
-    <router-outlet></router-outlet>
+	<router-outlet></router-outlet>
 
-    <app-message></app-message>
-    <app-hero-search></app-hero-search>
+	<app-message></app-message>
+	<app-hero-search></app-hero-search>
 </div>

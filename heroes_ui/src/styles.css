@@ -50,7 +50,7 @@ body, input[type="text"], button {
 
 .title-3 {
 	font-weight: bold;
-    margin-bottom: 15px;
+	margin-bottom: 15px;
 }
 
 .insi {
@@ -63,18 +63,16 @@ body, input[type="text"], button {
 }
 
 @media screen and (max-width: 770px) {
-	
 	.box {
 		width: 90%;
 	}
-
 }
 
 .notice {
-    font-size: medium;
-    text-align: center;
-    margin-top: 15px;
-    color: #666;
+	font-size: medium;
+	text-align: center;
+	margin-top: 15px;
+	color: #666;
 }
 
 .form-error {

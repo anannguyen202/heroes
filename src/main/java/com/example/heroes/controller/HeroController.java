@@ -84,7 +84,8 @@ public class HeroController {
 			Map<String, Object> data = new LinkedHashMap<>();
 			
 			data.put("total", heroService.getTotalHero());
-			data.put("list", m);
+//			data.put("list", m);
+			data.put("list", heroService.getHeroesFunc());
 		
 			res.setResult(data);
 			

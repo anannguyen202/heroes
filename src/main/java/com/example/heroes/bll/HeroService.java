@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.heroes.dal.HeroDao;
 import com.example.heroes.dal.UserDao;
+import com.example.heroes.dto.HeroDto;
 import com.example.heroes.dto.ProfileDto;
 import com.example.heroes.model.HeroModel;
 import com.example.heroes.model.Users;
@@ -37,6 +38,19 @@ public class HeroService {
 	// end
 
 	// region -- Methods --
+
+	public List<HeroDto> getHeroesFunc() {
+		List<HeroDto> res = new ArrayList<>();
+		
+		List<Object[]> l = heroDao.getHerosFunc();
+		for (Object[] i : l) {
+			HeroDto t = new HeroDto();
+			t.setId((int) i[0]);
+			t.setName((String) i[1]);
+			res.add(t);
+		}
+		return res;
+	}
 
 	public int getTotalHero() {
 		int res = heroDao.getTotalHero();

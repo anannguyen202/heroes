@@ -3,39 +3,42 @@
 		<h3 class="title-3">Sign up</h3>
 		<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
 			<div class="form-group" *ngIf="messageError">
-				<div class="alert alert-danger" role="alert">
-					{{messageError}}
+				<div class="alert alert-danger" role="alert">{{messageError}}
 				</div>
 			</div>
 			<div class="form-group">
-				<label>Username *</label>
-				<input class="form-control" formControlName="userName">
-				<span *ngIf="checkInvalid('userName')" class="form-error">Please enter user name</span>
+				<label>Username *</label> <input class="form-control"
+					formControlName="userName"> <span
+					*ngIf="checkInvalid('userName')" class="form-error">Please
+					enter user name</span>
 			</div>
 
 			<div class="form-group">
-				<label>Password *</label>
-				<input type="password" class="form-control" formControlName="password">
-				<span *ngIf="checkInvalid('password')" class="form-error">Please enter password</span>
+				<label>Password *</label> <input type="password"
+					class="form-control" formControlName="password"> <span
+					*ngIf="checkInvalid('password')" class="form-error">Please
+					enter password</span>
 			</div>
 
 			<div class="form-group">
-				<label>First name</label>
-				<input class="form-control" formControlName="firstName">
+				<label>First name</label> <input class="form-control"
+					formControlName="firstName">
 			</div>
 
 			<div class="form-group">
-				<label>Last name</label>
-				<input class="form-control" formControlName="lastName">
+				<label>Last name</label> <input class="form-control"
+					formControlName="lastName">
 			</div>
 
 			<div class="form-group">
-				<button type="submit" [disabled]="!signUpForm.valid" class="btn btn-primary btn-block">Sign up</button>
+				<button type="submit" [disabled]="!signUpForm.valid"
+					class="btn btn-primary btn-block">Sign up</button>
 			</div>
 		</form>
 
 		<div class="notice">
-			Back to <a class="nav-title" routerLink="/sign-in" routerLinkActive="active">Sign in</a>
+			Back to <a class="nav-title" routerLink="/sign-in"
+				routerLinkActive="active">Sign in</a>
 		</div>
 	</div>
 </div>
